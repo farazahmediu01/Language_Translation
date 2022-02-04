@@ -1,14 +1,9 @@
-from fnmatch import translate
 from deep_translator import GoogleTranslator
-from bs4 import BeautifulSoup
 from os.path import exists
 from keys import api_key
 import pandas as pd
 import people_also_ask
-import requests
 import itertools
-
-
 
 # variables
 text = input("\nEnter text which you want to translate: ")
