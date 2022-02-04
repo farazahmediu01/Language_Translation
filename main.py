@@ -1,9 +1,10 @@
 from deep_translator import GoogleTranslator
-from os.path import exists
 from keys import api_key
 import pandas as pd
 import people_also_ask
 import itertools
+import glob
+import os
 
 # variables
 text = input("\nEnter text which you want to translate: ")
@@ -46,12 +47,10 @@ for text in translations:
 print("Scraping complete")
 print("Preparing csv\n")
 
-
 all_variables = {"String": translations, "Translated_Language": [
     f"{v}_{k}" for k, v in languages.items()], "PPA": ppa}
 df = pd.DataFrame(all_variables)
 print(df)
-
 
 df.to_csv(str(uuid.uuid4()) + '.csv')
 print("\nCompleted..\n")
