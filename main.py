@@ -6,8 +6,20 @@ import itertools
 import glob
 import os
 
+
+def genrate_file_name():
+    files = glob.glob(r"programs\output\*")
+    last_file_name = os.path.basename(files[-1])[:-4]
+    get_id = last_file_name[19:]
+    new_id = str(int(get_id) + 1)
+    new_name = "translation_output_" + new_id + ".csv"
+    return new_name
+
 # variables
 text = input("\nEnter text which you want to translate: ")
+path = r"programs\output\translation_output_0.csv"
+csv_name = "translation_output_0.csv"
+is_file_exists = os.path.exists(path)
 
 print("\nGoogle Translate contains about 109 languages translating text in all languages might be time consuming depending on internet speed.")
 print("In how many languages you want to translate your entered text?\n")
@@ -52,5 +64,12 @@ all_variables = {"String": translations, "Translated_Language": [
 df = pd.DataFrame(all_variables)
 print(df)
 
-df.to_csv(str(uuid.uuid4()) + '.csv')
-print("\nCompleted..\n")
+# df.to_csv(str(uuid.uuid4()) + '.csv')
+# print("\nCompleted..\n")
+
+if is_file_exists:
+    csv_name = genrate_file_name()
+else:
+    os.makedirs(r"programs\output")
+
+df.to_csv(r"programs\output\\" + csv_name)
